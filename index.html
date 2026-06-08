@@ -37,7 +37,6 @@
   <body
     class="bg-slate-900 md:py-8 min-h-screen flex justify-center items-center relative"
   >
-    <!-- STATUS TOAST SUCCESS -->
     <div
       id="toastNotif"
       class="fixed top-8 left-1/2 transform -translate-x-1/2 bg-slate-800/90 backdrop-blur-md text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none z-[100] translate-y-[-20px] border border-slate-600"
@@ -52,11 +51,9 @@
       >
     </div>
 
-    <!-- MAIN CONTAINER -->
     <div
       class="w-full max-w-md bg-slate-50 min-h-screen md:min-h-[850px] md:rounded-3xl shadow-2xl relative flex flex-col overflow-y-auto pb-28"
     >
-      <!-- HEADER UTAMA -->
       <div
         class="bg-gradient-to-br from-blue-600 via-blue-600 to-indigo-700 pt-8 pb-12 px-6 rounded-b-[2.5rem] relative shadow-lg overflow-hidden"
       >
@@ -94,7 +91,6 @@
         </div>
       </div>
 
-      <!-- REKAP BULAN JUNI -->
       <div class="px-5 mt-6 flex-1">
         <div class="flex justify-between items-center mb-3">
           <h3 class="text-sm font-bold text-slate-800">
@@ -106,17 +102,14 @@
             >Rp 0</span
           >
         </div>
-        <div
-          id="listPengeluaran"
-          class="bg-white rounded-2xl shadow-sm border border-slate-100 divide-y divide-slate-50 min-h-[100px] flex flex-col justify-center"
-        >
-          <p class="text-center text-xs text-slate-400 py-6">
+
+        <div id="listPengeluaran" class="grid grid-cols-2 gap-3 min-h-[100px]">
+          <p class="col-span-2 text-center text-xs text-slate-400 py-6">
             Mengambil data...
           </p>
         </div>
       </div>
 
-      <!-- BOTTOM NAVBAR -->
       <div
         class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-4 py-2 flex justify-between items-center z-30 shadow-[0_-4px_24px_rgba(0,0,0,0.04)]"
       >
@@ -125,7 +118,6 @@
           ><span class="text-[10px] font-bold">Home</span>
         </button>
 
-        <!-- MENU TARGET -->
         <button
           onclick="toggleTargetModal(true)"
           class="flex flex-col items-center gap-1 flex-1 text-slate-400 hover:text-blue-600 transition"
@@ -143,7 +135,6 @@
           </button>
         </div>
 
-        <!-- MENU SOURCE -->
         <button
           onclick="toggleSourceModal(true)"
           class="flex flex-col items-center gap-1 flex-1 text-slate-400 hover:text-blue-600 transition"
@@ -152,7 +143,6 @@
           ><span class="text-[10px] font-medium">Source</span>
         </button>
 
-        <!-- MENU RIWAYAT (MENGGANTIKAN PROFIL) -->
         <button
           onclick="toggleRiwayatModal(true)"
           class="flex flex-col items-center gap-1 flex-1 text-slate-400 hover:text-blue-600 transition"
@@ -163,7 +153,6 @@
       </div>
     </div>
 
-    <!-- POPUP FORM CATAT CASHFLOW -->
     <div
       id="inputModal"
       class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex justify-center items-center p-4"
@@ -250,7 +239,6 @@
       </div>
     </div>
 
-    <!-- MODAL BOTTOM SHEET: SOURCE SALDO -->
     <div
       id="sourceModal"
       class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex flex-col justify-end"
@@ -278,7 +266,6 @@
       </div>
     </div>
 
-    <!-- MODAL BOTTOM SHEET: TARGET DENGAN OPERASI CRUD -->
     <div
       id="targetModal"
       class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex flex-col justify-end"
@@ -308,7 +295,6 @@
           </div>
         </div>
 
-        <!-- FORM SUB-CRUD INLINE (TERSEMBUNYI SECARA DEFAULT) -->
         <div
           id="targetFormContainer"
           class="hidden bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-4 space-y-3"
@@ -361,7 +347,6 @@
       </div>
     </div>
 
-    <!-- MODAL BOTTOM SHEET: RIWAYAT CASHFLOW HARIAN -->
     <div
       id="riwayatModal"
       class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex flex-col justify-end"
@@ -381,7 +366,6 @@
           </button>
         </div>
 
-        <!-- FILTER KALENDER -->
         <div class="mb-4">
           <label
             class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-wider"
@@ -402,9 +386,7 @@
       </div>
     </div>
 
-    <!-- JAVASCRIPT ENGINE -->
     <script>
-      // MASUKKAN URL APP SCRIPT TERBARU ANDA DI SINI
       const API_URL =
         "https://script.google.com/macros/s/AKfycbxr7pLxrLua4pyj6R4E7z3EvDAwTo3xOt6sKwvRfi3bueak4GKd16TGSnau7TosSE8Y/exec";
 
@@ -421,6 +403,15 @@
         "orang rumah": "🏠",
         transport: "🛵",
       };
+
+      // Array warna untuk background icon agar mirip desain card pada gambar 1
+      const themeColors = [
+        { bg: "bg-blue-50", text: "text-blue-600" },
+        { bg: "bg-amber-50", text: "text-amber-500" },
+        { bg: "bg-emerald-50", text: "text-emerald-500" },
+        { bg: "bg-purple-50", text: "text-purple-500" },
+        { bg: "bg-rose-50", text: "text-rose-500" },
+      ];
 
       function formatRupiah(angka) {
         if (
@@ -481,7 +472,6 @@
         }
       }
 
-      // AMBIL DATA DENGAN PELINDUNG ANTI-CRASH
       async function fetchData() {
         const icon = document.getElementById("refreshIcon");
         icon.classList.add("fa-spin");
@@ -497,7 +487,6 @@
               data.juneTotalOutcome,
             );
 
-            // Pelindung agar tidak crash jika backend versi lama belum terupdate
             globalSourceData = data.sourceData || [];
             globalTargetData = data.targetData || [];
             globalHistoryData = data.historyData || [];
@@ -510,18 +499,28 @@
             listContainer.innerHTML = "";
 
             if (data.juneSummary) {
+              let colorIndex = 0;
               Object.keys(data.juneSummary).forEach((cat) => {
                 const emoji = emojiMap[cat.toLowerCase()] || "💰";
+
+                // Rotasi warna background icon
+                const theme = themeColors[colorIndex % themeColors.length];
+                colorIndex++;
+
+                // PERUBAHAN DI SINI: HTML Template diubah menjadi Card Layout
                 listContainer.insertAdjacentHTML(
                   "beforeend",
                   `
-                            <div class="p-3.5 flex justify-between items-center">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 bg-blue-50 text-blue-600 rounded-xl flex justify-center items-center text-sm">${emoji}</div>
-                                    <p class="text-xs font-bold text-slate-800">${cat}</p>
-                                </div>
-                                <span class="text-xs font-bold text-slate-700">${formatRupiah(data.juneSummary[cat])}</span>
-                            </div>`,
+                    <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex justify-between items-center w-full transition hover:shadow-md">
+                        <div class="flex flex-col">
+                            <p class="text-[11px] text-slate-500 font-medium mb-1">${cat}</p>
+                            <h4 class="text-sm font-extrabold text-slate-800">${formatRupiah(data.juneSummary[cat])}</h4>
+                        </div>
+                        <div class="w-10 h-10 ${theme.bg} ${theme.text} rounded-xl flex justify-center items-center text-lg">
+                            ${emoji}
+                        </div>
+                    </div>
+                  `,
                 );
               });
             }
@@ -533,7 +532,6 @@
         }
       }
 
-      // RENDER DATA SOURCE AMAN
       function renderSourceData() {
         const container = document.getElementById("listSource");
         container.innerHTML = "";
@@ -567,24 +565,21 @@
         });
       }
 
-      // RENDER RIWAYAT DENGAN DATE PARSER TERBAIK
       function renderHistoryData() {
         const container = document.getElementById("listRiwayat");
         container.innerHTML = "";
-        const selectedDate = document.getElementById("historyDateInput").value; // yyyy-mm-dd
+        const selectedDate = document.getElementById("historyDateInput").value;
         if (!selectedDate) return;
 
         const parts = selectedDate.split("-");
-        const formattedFilterDate = `${parts[2]}/${parts[1]}/${parts[0]}`; // dd/mm/yyyy
+        const formattedFilterDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
 
         const filtered = globalHistoryData.filter((item) => {
           if (!item.tanggal) return false;
 
-          // Cek 1: Jika format murni text dd/MM/yyyy dari Google Sheets
           const textDate = item.tanggal.split(" ")[0];
           if (textDate === formattedFilterDate) return true;
 
-          // Cek 2: Jika terkonversi jadi objek Date
           try {
             const d = new Date(item.tanggal);
             if (!isNaN(d)) {
@@ -637,7 +632,6 @@
         });
       }
 
-      // CRUD TARGET LOGIC DISEDERHANAKAN
       function renderTargetData() {
         const container = document.getElementById("listTarget");
         container.innerHTML = "";
